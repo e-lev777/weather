@@ -19,4 +19,4 @@ $dsn = 'mysql:host=localhost; dbname=weather';
 //user
 $user = 'root';
 //pass
-$password = '328896Lev777';
+$password = '';
