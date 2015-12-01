@@ -1,0 +1,27 @@
+<?php
+use Lib\Debugger;
+use Lib\Router;
+//Debugger::mpr($args['data']);
+?>
+<h2>Текущие источники.</h2>
+
+<a href="<?= Router::getRoute('admin', 'adm_addSource')?>" class="btn btn-success">Добавить источник</a>
+<br>
+<br>
+<table border="1" style="background: rgba(159, 159, 159, 0.41); text-align: center; border: 2px solid black;">
+    <tr>
+        <td><b>Имя источника</b></td>
+        <td><b>Xml файл прогноза погоды</b></td>
+        <td><b>Xml файл списка н.п.</b></td>
+        <td><b>Действия</b></td>
+    </tr>
+    <?php foreach($args['data'] as $source) : ?>
+        <tr>
+            <td style="padding: 10px"><?= $source['source_name'] ?></td>
+            <td style="padding: 10px"><?= $source['weather_source'] ?></td>
+            <td style="padding: 10px"><?= $source['cities_source'] ?></td>
+            <td style="padding: 10px"><a href="<?= Router::getRoute('admin', 'adm_editSource', $params = ['id' => $source['id']]) ?>" class="btn btn-warning">Редактировать</a>
+            <a href="<?= Router::getRoute('admin', 'adm_deleteSource', $params = ['id' => $source['id']]) ?>" class="btn btn-danger">Удалить</a></td>
+        </tr>
+    <?php endforeach?>
+</table>

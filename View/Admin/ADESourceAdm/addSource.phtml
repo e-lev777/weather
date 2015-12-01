@@ -1,0 +1,20 @@
+<?php
+use Lib\Session;
+use Lib\Router;
+?>
+<h2>Добавить источник</h2>
+<div>
+    <span class="admin-flash"><?=Session::getFlash();?></span>
+    <form action="" method="post">
+        <p><b>Имя источника</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_name" placeholder=""><br>
+        <p><b>URL XML файла погоды</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_weather_file" placeholder=""><br>
+        <p><b>URL XML файла населенных пунктов</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_cities_file" placeholder=""><br>
+        <p><b>ID населенного пункта по умолчанию</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_default_value" placeholder=""><br>
+        <input class="btn btn-success btn-lg" type="submit" name="addNewSource" value="Создать">
+        <a href="<?= Router::getRoute('admin', 'adm_default') ?>" class="btn btn-danger btn-lg">Отмена</a>
+    </form>
+</div>

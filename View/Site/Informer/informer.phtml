@@ -1,0 +1,22 @@
+<div style=" border: 2px solid #D0C8C8; border-radius: 10px; width: 220px; padding: 0 10px; background: rgba(4, 2, 12, 0.5);
+    color: white; margin: 0px;">
+
+    <h2>Погода от Yandex</h2>
+
+    <h3><?= $args['city_name']?></h3>
+
+    <h4><?= $args['data'][0]['date'].' '.$args['data'][0]['week_day'] ?></h4>
+
+    <?php foreach ($args['data'][0]['weather'] as $item): ?>
+        <?php if( !isset($item['temperature']) ): ?>
+
+            <p><?= $item['time'].' '.$item['image'].' '.$item['temperature_from'].'...'.$item['temperature_to']?></p>
+
+        <?php else : ?>
+
+            <p><?= $item['time'].' '.$item['image'].' '.$item['temperature']?></p>
+
+        <?php endif ?>
+    <?php endforeach ?>
+
+</div>

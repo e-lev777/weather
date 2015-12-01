@@ -1,0 +1,61 @@
+<h2><?= $args['city_name']?></h2>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">1 - 5 дней</a></li>
+        <li><a href="#tab2" data-toggle="tab">5 - 10 дней</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+            <div class=" col-lg-1"></div>
+            <?php for($i=0; $i<=4; $i++) : ?>
+
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+                    <div class="weather">
+
+                        <h4><?= $args['data'][$i]['date'].' '.$args['data'][$i]['week_day'] ?></h4>
+                        <?php foreach ($args['data'][$i]['weather'] as $item): ?>
+                            <?php if( !isset($item['temperature']) ): ?>
+
+                                <p><?= $item['time'].' '.$item['image'].' '.$item['temperature_from'].'...'.$item['temperature_to']?></p>
+
+                            <?php else : ?>
+
+                                <p><?= $item['time'].' '.$item['image'].' '.$item['temperature']?></p>
+
+                            <?php endif ?>
+                        <?php endforeach ?>
+
+                    </div>
+                </div>
+
+            <?php endfor ?>
+
+        </div>
+        <div class="tab-pane" id="tab2">
+            <div class=" col-lg-1"></div>
+            <?php for($i=5; $i<=9; $i++) : ?>
+
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+                    <div class="weather">
+
+                        <h4><?= $args['data'][$i]['date'].' '.$args['data'][$i]['week_day'] ?></h4>
+                        <?php foreach ($args['data'][$i]['weather'] as $item): ?>
+                            <?php if( !isset($item['temperature']) ): ?>
+
+                                <p><?= $item['time'].' '.$item['image'].' '.$item['temperature_from'].'...'.$item['temperature_to']?></p>
+
+                            <?php else : ?>
+
+                                <p><?= $item['time'].' '.$item['image'].' '.$item['temperature']?></p>
+
+                            <?php endif ?>
+                        <?php endforeach ?>
+
+                    </div>
+                </div>
+
+            <?php endfor ?>
+
+        </div>
+    </div>
+</div>

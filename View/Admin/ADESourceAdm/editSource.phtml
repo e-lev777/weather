@@ -1,0 +1,23 @@
+<?php
+use Lib\Session;
+use Lib\Methods;
+use Lib\Router;
+use Lib\Debugger;
+Debugger::mpr($args['msg'])
+?>
+<h2>Редактировать источник</h2>
+<div>
+    <span class="admin-flash"><?= $args['msg'] ?></span>
+    <form action="" method="post">
+        <p><b>Имя источника</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_name" placeholder="" value="<?= isset($args['data']['source_name'])?$args['data']['source_name']:null ?>"><br>
+        <p><b>URL XML файла погоды</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_weather_file" placeholder="" value="<?= isset($args['data']['weather_source'])?$args['data']['weather_source']:null ?>" ><br>
+        <p><b>URL XML файла населенных пунктов</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_cities_file" placeholder="" value="<?= isset($args['data']['cities_source'])?$args['data']['cities_source']:null ?>" <br>
+        <p><b>ID населенного пункта по умолчанию</b></p>
+        <input class="form-control admin-form-about" type="text" name="source_default_value" placeholder="" value="<?= isset($args['data']['default_value'])?$args['data']['default_value']:null ?>" ><br>
+        <input class="btn btn-success btn-lg" type="submit" name="editSource" value="Сохранить">
+        <a href="<?= Router::getRoute('admin', 'adm_default') ?>" class="btn btn-danger btn-lg">Отмена</a>
+    </form>
+</div>

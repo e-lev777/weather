@@ -1,0 +1,5 @@
+<?php
+use Lib\Router;
+?>
+<h1><?php echo $code. ' - ' .$message; ?></h1>
+<a href="<?= Router::getRoute('site', 'default'); ?>">На главную страницу</a>
