@@ -74,6 +74,11 @@ abstract class Router
                 'controller' => 'ADESourceAdm',
                 'action' => 'fail',
             ],
+            'adm_citiesSave' => [
+                'regex' => '/admin/citiesSave.html',
+                'controller' => 'ADESourceAdm',
+                'action' => 'saveCitiesFromXml',
+            ],
         ],
     ];
 

@@ -2,7 +2,7 @@
 
 define("DS", DIRECTORY_SEPARATOR);
 define("ROOT", __DIR__.DS);
-define("VIEW_DIR", ROOT."View".DS);
+define("VIEW_DIR", ROOT."View");
 define("ADMIN_VIEW_DIR", ROOT."View".DS."Admin".DS);
 define("CONTROLLER_DIR", ROOT."Controller".DS);
 define("ADMIN_CONTROLLER_DIR", ROOT."Controller".DS."Admin".DS);
@@ -19,4 +19,4 @@ $dsn = 'mysql:host=localhost; dbname=weather';
 //user
 $user = 'root';
 //pass
-$password = '';
+$password = '328896Lev777';

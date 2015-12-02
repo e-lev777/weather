@@ -6,6 +6,7 @@ use Lib\Registry;
 use Lib\Router;
 use Lib\Controller;
 use Lib\Debugger;
+use Controller\Site\IndexController;
 
 Session::start();
 
@@ -17,7 +18,7 @@ $url = $url[0];
 function __autoload($classname)
 {
     $classFile = str_replace('\\', '/', $classname);
-    if (file_exists(ROOT . $classFile . '.php')) {
+    if (file_exists(ROOT . $classFile.'.php')) {
         require ROOT . $classFile . '.php';
     } else {
         throw new Exception("{$classFile} not found");
@@ -34,7 +35,7 @@ try {
     $_action = Router::$_action;
 
 
-    $_controller = 'Controller\\'.ucfirst($_controller)."Controller";
+    $_controller = '\Controller\\'.ucfirst($_controller)."Controller";
     $_action .= "Action";
 
     $_controller = new $_controller();

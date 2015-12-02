@@ -116,4 +116,18 @@ class Weather
         }
         return $cities;
     }
+
+    /*
+     * Parse xml cities list for saving in model
+     */
+    public static function parseXmlCitiesList($xml_cities_list){
+        $cities_data = simplexml_load_file($xml_cities_list);
+
+        foreach ($cities_data->country as $country){
+            foreach($country->city as $city){
+                $cities_list[] = $city;
+            }
+        }
+        return $cities_list;
+    }
 }

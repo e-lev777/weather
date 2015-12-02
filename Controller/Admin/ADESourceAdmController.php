@@ -3,9 +3,11 @@
 namespace Controller\Admin;
 
 use Lib\Controller;
+use Lib\Debugger;
 use Lib\MetaHelper;
 use Lib\Request;
 use Lib\Session;
+use Lib\Weather;
 use Model\WeatherModel;
 use Lib\Router;
 
@@ -102,5 +104,34 @@ class ADESourceAdmController extends Controller
             'page_title' => $title
         ];
         return $this->render('fail.phtml', $args, 'admin');
+    }
+
+    public function saveCitiesFromXmlAction(){
+
+        $title = MetaHelper::setPageTitle('Загрузить города');
+        $request = new Request();
+        $model = new WeatherModel();
+        $msg = '';
+
+        if( $request->isPost() ){
+            if( $request->post('submit') ){
+                $data = Weather::parseXmlCitiesList($request->post('cities_source'));
+                ini_set('max_execution_time', 900);
+                foreach($data as $value){
+                    $model->saveCitiesInDb($value['id'], $value, $value['country']);
+                }
+                if( $model == true ){
+                    $msg = 'Загружено';
+                } else {
+                    $msg = 'Ошибка загрузки';
+                }
+            }
+        }
+
+        $args =[
+            'page_title' => $title,
+            'msg' => $msg,
+        ];
+        return $this->render('saveCitiesFromXml.phtml', $args, 'admin');
     }
 }

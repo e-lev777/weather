@@ -19,7 +19,9 @@ class IndexController extends Controller
      */
     public function indexAction()
     {
+        $msg ='';
         $title = MetaHelper::setPageTitle('Погода');
+        $request = new Request();
         $model = new WeatherModel();
 
         /*
@@ -28,12 +30,25 @@ class IndexController extends Controller
          */
         $yandex_xml = $model->getXmlYandexForecast();
         $yandex_default_values = $model->getDefaultYandexValues();
-        $default_value = Cookie::get('city_id') ? Cookie::get('city_id') : $yandex_default_values['default_value'];
+
+        if( $request->isPost() ){
+            if( $request->post('submit') ){
+                $result = $model->searchByCityName($request->post('city_search'));
+                if( $result ){
+                    $city_id = $result['city_id'];
+                } else {
+                    $city_id = $yandex_default_values['default_value'];
+                    $msg = 'Город не найден в списке';
+                }
+            }
+        } else {
+            $city_id = Cookie::get('city_id') ? Cookie::get('city_id') : $yandex_default_values['default_value'];
+        }
 
         /*
          * Yandex xml data parsing
          */
-        $weather = new Weather($yandex_xml['weather_source'], $default_value);
+        $weather = new Weather($yandex_xml['weather_source'], $city_id);
         $data = $weather->xmlProcessing();
         $city_name = array_shift($data);
 
@@ -54,6 +69,7 @@ class IndexController extends Controller
             'countries' => $countries,
             'city_name' => $city_name,
             'informer' => $informer,
+            'msg' => $msg,
         ];
 
         /*
@@ -84,8 +100,10 @@ class IndexController extends Controller
         $request = new Request();
         $model = new WeatherModel();
 
+
         $yandex_xml = $model->getXmlYandexForecast();
         $city_id = $request->post('city_id');
+
 
         /*
          * Getting weather report for city

@@ -1,18 +1,27 @@
-<div>
-    <select id="country" onchange='changeCountry(this.value)'>
-        <option value="0">Выберете страну</option>
+<div class="row">
+    <div class="col-md-4">
+        <select id="country" onchange='changeCountry(this.value)'>
+            <option value="0">Выберете страну</option>
 
-        <?php foreach($args['countries']->country as $country) : ?>
-            <option value="<?= $country['name'];?>"><?= $country['name'];?></option>
-        <?php endforeach ?>
+            <?php foreach($args['countries']->country as $country) : ?>
+                <option value="<?= $country['name'];?>"><?= $country['name'];?></option>
+            <?php endforeach ?>
 
-    </select>
-    <select id="city" onchange="changeCity(this.value)">
-        <option value="0">--Выберете город--</option>
-    </select>
+        </select>
+        <select id="city" onchange="changeCity(this.value)">
+            <option value="0">--Выберете город--</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <form action="" method="post">
+            Поиск по городу <input type="text" name="city_search" placeholder="поиск по городу">
+            <input type="submit" value="Go" name="submit">
+        </form>
+    </div>
 </div>
 
 <div id="result">
+    <h4><?= isset($args['msg'])?$args['msg']:null ?></h4>
     <h2><?= $args['city_name']?></h2>
     <div class="tabbable"> <!-- Only required for left/right tabs -->
         <ul class="nav nav-tabs">

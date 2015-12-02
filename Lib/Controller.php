@@ -10,6 +10,7 @@ abstract class Controller
     {
         $className = get_class($this);
         $className = str_replace('Controller', '', $className);
+        $className = str_replace('\\', '/', $className);
         $Path = VIEW_DIR . $className . DS . $viewName;
         $adminPath = VIEW_DIR . $className . DS . $viewName;
 
@@ -20,7 +21,7 @@ abstract class Controller
                 $data = ob_get_clean();
 
                 ob_start();
-                    require VIEW_DIR . "layout.phtml";
+                    require VIEW_DIR .'/'. "layout.phtml";
                 return ob_get_clean();
             } else {
                 throw new Exception("{$Path} not found");
@@ -32,7 +33,7 @@ abstract class Controller
                 $data = ob_get_clean();
 
                 ob_start();
-                    require VIEW_DIR . "adminLayout.phtml";
+                    require VIEW_DIR .'/'. "adminLayout.phtml";
                 return ob_get_clean();
             } else {
                 throw new Exception("{$adminPath} not found");
@@ -45,17 +46,17 @@ abstract class Controller
         $menu = new AsideMenu();
 
         ob_start();
-            require VIEW_DIR.'asideMenu.phtml';
+            require VIEW_DIR.DS.'asideMenu.phtml';
         return ob_get_clean();
     }
 
     public static function renderError($code, $message){
         ob_start();
-            require VIEW_DIR.'error.phtml';
+            require VIEW_DIR.DS.'error.phtml';
         $data = ob_get_clean();
 
         ob_start();
-            require VIEW_DIR."layout.phtml";
+            require VIEW_DIR.DS.'/'."layout.phtml";
         return ob_get_clean();
     }
 
@@ -63,6 +64,7 @@ abstract class Controller
     {
         $className = get_class($this);
         $className = str_replace('Controller', '', $className);
+        $className = str_replace('\\', '/', $className);
         $Path = VIEW_DIR . $className . DS . $viewName;
         $adminPath = VIEW_DIR . $className . DS . $viewName;
 
