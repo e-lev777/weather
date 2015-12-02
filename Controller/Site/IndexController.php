@@ -36,6 +36,7 @@ class IndexController extends Controller
                 $result = $model->searchByCityName($request->post('city_search'));
                 if( $result ){
                     $city_id = $result['city_id'];
+                    Cookie::set('city_id', $city_id);
                 } else {
                     $city_id = $yandex_default_values['default_value'];
                     $msg = 'Город не найден в списке';
