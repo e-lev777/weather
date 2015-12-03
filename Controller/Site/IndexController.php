@@ -31,9 +31,9 @@ class IndexController extends Controller
         $yandex_xml = $model->getXmlYandexForecast();
         $yandex_default_values = $model->getDefaultYandexValues();
 
-        if( $request->isPost() ){
-            if( $request->post('submit') ){
-                $result = $model->searchByCityName($request->post('city_search'));
+
+            if( $request->get('submit') ){
+                $result = $model->searchByCityName($request->get('city_search'));
                 if( $result ){
                     $city_id = $result['city_id'];
                     Cookie::set('city_id', $city_id);
@@ -41,10 +41,9 @@ class IndexController extends Controller
                     $city_id = $yandex_default_values['default_value'];
                     $msg = 'Город не найден в списке';
                 }
+            } else {
+                $city_id = Cookie::get('city_id') ? Cookie::get('city_id') : $yandex_default_values['default_value'];
             }
-        } else {
-            $city_id = Cookie::get('city_id') ? Cookie::get('city_id') : $yandex_default_values['default_value'];
-        }
 
         /*
          * Yandex xml data parsing
